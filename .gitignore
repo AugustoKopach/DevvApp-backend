@@ -1,0 +1,15 @@
+# Os genrated files #
+.DS_Store
+Thumbs.db
+.tmp/
+.env
+
+#packageManager specific look files
+package-lock.json
+node_modules/
+
+#build process generated files
+tsconfig.buil.json
+
+# Dist generated folder
+dist/
