@@ -1,6 +1,7 @@
 import type { Persona } from './Persona';
 
 export type Auto = {
+    id   : string;
     marca: string;
     modelo: string;
     año: number;

@@ -5,7 +5,8 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import process from 'process';
 import Persona from './model/Persona';
-import autorouter from './Repository/autoRepository.js';
+import autorouter from './controller/autoController';
+import personarouter from './controller/personaController';
 
 
 const personas: Persona[] = [];
@@ -20,7 +21,7 @@ const port = process.env.PORT || 9000;
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
-app.use(autorouter);
+app.use('/api', personarouter);
 app.use('/api', autorouter);
 
 // Mis endpoints van acá
@@ -29,23 +30,7 @@ app.get('/', (req,res) => {
     res.json('HELLO WORD');
 });
 
-app.get('/personas', (req, res) => {
-    const datosamostrar = personas.map(persona => ({
-        dni: persona.dni,
-        nombre: persona.nombre,
-        apellido: persona.apellido,
-    }));
 
-    res.json(datosamostrar);
-});
-
-
-app.post('/persona', (req, res) => {
-    const nuevaPersona: Persona = req.body;
-
-    personas.push({ ...nuevaPersona, autos: nuevaPersona.autos || [] });
-    res.status(201).json({ persona: nuevaPersona });
-});
 
 // Levantamos el servidor en el puerto que configuramos
 app.listen(port, () => {

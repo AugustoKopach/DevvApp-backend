@@ -1,42 +1,24 @@
 import express from 'express';
-import Persona from '../model/Persona';
+import { AutoService } from '../service/autoService';
 
 const autorouter = express.Router();
 
-const personas: Persona[] = [];
-
 autorouter.get('/autos', (req, res) => {
-    const dni = req.query.dni as string | undefined;
-
-    if (!dni) {
-        const todosLosAutos = personas.map(p => p.autos).flat();
-         res.status(200).json({ message: 'Todos los autos:', autos: todosLosAutos });
-    }
-
-    const persona = personas.find(p => p.dni === dni);
-
-    if (!persona) {
-        throw res.status(404).json({ message: 'El DNI no corresponde a ninguna persona' });
-    }
-
-        res.status(200).json({ message: 'Los autos son:', autos: persona.autos });
+    const id = req.query.id as string | undefined;
+    const autos = AutoService.listarAutos(id);
+    res.status(200).json({ message: 'Autos encontrados', autos });
 });
 
 autorouter.post('/autos', (req, res) => {
-    const { dni, auto } = req.body;
+    const { id, auto } = req.body;
+    const resultado = AutoService.agregarAuto(id, auto);
 
-    const persona = personas.find(p => p.dni === dni);
-    if (!persona) {
-        throw res.status(404).json({ message: 'Persona no encontrada' });
+    if (!resultado.success) {
+        const status = resultado.error === 'Persona no encontrada' ? 404 : 400;
+         res.send(status).json({ message: resultado.error });
     }
 
-    const { marca, modelo, año, patente, color, numeroChasis, numeroMotor } = auto;
-
-    const nuevoAuto = { marca, modelo, año, patente, color, numeroChasis, numeroMotor };
-
-    persona.autos.push(nuevoAuto);
-
-         res.status(201).json({ auto: nuevoAuto });
+    res.send(201)
 });
 
 export default autorouter;

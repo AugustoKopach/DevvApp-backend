@@ -7,13 +7,14 @@ export enum Genero {
 }
 
 export type Persona = {
-    nombre: string;
-    apellido: string;
-    dni: string;
+    id             : String;
+    nombre         : string;
+    apellido       : string;
+    dni            : string;
     fechaNacimiento: string;
-    genero: Genero;
-    donanteOrganos: boolean;
-    autos: Auto[];
+    genero         : Genero;
+    donanteOrganos : boolean;
+    autos          : Auto[]  ;
 };
 
 export default Persona;
