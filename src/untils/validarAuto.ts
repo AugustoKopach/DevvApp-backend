@@ -1,6 +1,7 @@
-import type { Auto } from '../model/Auto';
+import type { AutoDTO } from '../dto/autoDTO';
 
-export const esAutoValido = (auto: Auto): boolean => {
+export const esAutoValido = (auto: AutoDTO
+): boolean => {
     if (!auto) return false;
 
     const {

@@ -7,7 +7,7 @@ export enum Genero {
 }
 
 export type Persona = {
-    id             : String;
+    id             : string;
     nombre         : string;
     apellido       : string;
     dni            : string;

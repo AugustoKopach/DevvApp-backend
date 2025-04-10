@@ -1,30 +1,43 @@
 import express from 'express';
-import { obtenerPersonas, crearPersona } from '../service/personaService';
+import { v4 as uuidv4 } from 'uuid';
+import { crearPersona, editarPersona, eliminarPersona, obtenerPersonasResumen } from '../service/personaService';
+import { Persona } from '../model/Persona';
 
-const personarouter = express.Router();
+const router = express.Router();
 
-personarouter.get('/personas', (req, res) => {
-  try {
-    const personas = obtenerPersonas();
-    res.json(personas);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener personas' });
+router.get('/personas', (req, res) => {
+  res.json(obtenerPersonasResumen());
+});
+
+router.post('/persona', (req, res) => {
+  const nueva: Persona = { ...req.body, id: uuidv4(), autos: req.body.autos || [] };
+  const resultado = crearPersona(nueva);
+
+  if ('error' in resultado) {
+    res.status(resultado.error).json({ message: resultado.message });
+  } else {
+    res.status(201).json(resultado);
   }
 });
 
-personarouter.post('/persona', (req, res) => {
-  try {
-    const persona = crearPersona(req.body);
-    res.status(201).json({ persona });
-  } catch (error: any) {
-    if (error.message === 'Datos inválidos') {
-      res.status(400).json({ message: error.message });
-    } else if (error.message === 'DNI en uso') {
-      res.status(409).json({ message: error.message });
-    } else {
-      res.status(500).json({ message: 'Error inesperado' });
-    }
+router.put('/persona/:id', (req, res) => {
+  const resultado = editarPersona(req.params.id, req.body);
+
+  if ('error' in resultado) {
+    res.status(resultado.error).json({ message: resultado.message });
+  } else {
+    res.status(200).json({ message: 'Actualizada correctamente' });
   }
 });
 
-export default personarouter;
+router.delete('/persona/:id', (req, res) => {
+  const resultado = eliminarPersona(req.params.id);
+
+  if ('error' in resultado) {
+    res.status(resultado.error).json({ message: resultado.message });
+  } else {
+    res.sendStatus(200);
+  }
+});
+
+export default router;

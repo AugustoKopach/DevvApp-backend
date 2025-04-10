@@ -1,24 +1,32 @@
 import { personas } from '../config/personasConfig';
-import type { Auto } from '../model/Auto';
+import { Auto } from '../model/Auto';
 
-export const AutoRepository = {
-    findPersonaById: (id: string) => {
-        return personas.find(p => p.id === id);
-    },
+export const addAutoToPersona = (idPersona: string, auto: Auto): Auto | null => {
+    const persona = personas.find(p => p.id === idPersona);
+    if (!persona) return null;
 
-    getAllAutos: (): Auto[] => {
-        return personas.flatMap(p => p.autos);
-    },
+    persona.autos.push(auto);
+    return auto;
+};
 
-    getAutosByPersonaId: (id: string): Auto[] => {
-        const persona = personas.find(p => p.id === id);
-        return persona ? persona.autos : [];
-    },
+export const updateAuto = (idPersona: string, idAuto: string, nuevosDatos: Partial<Auto>): Auto | null => {
+    const persona = personas.find(p => p.id === idPersona);
+    if (!persona) return null;
 
-    addAutoToPersona: (id: string, auto: Auto): boolean => {
-        const persona = personas.find(p => p.id === id);
-        if (!persona) return false;
-        persona.autos.push(auto);
-        return true;
-    }
+    const auto = persona.autos.find(a => a.id === idAuto);
+    if (!auto) return null;
+
+    Object.assign(auto, nuevosDatos);
+    return auto;
+};
+
+export const deleteAuto = (idPersona: string, idAuto: string): boolean => {
+    const persona = personas.find(p => p.id === idPersona);
+    if (!persona) return false;
+
+    const index = persona.autos.findIndex(a => a.id === idAuto);
+    if (index === -1) return false;
+
+    persona.autos.splice(index, 1);
+    return true;
 };

@@ -1,28 +1,39 @@
-import { AutoRepository } from '../repository/autoRepository';
-import { esAutoValido } from '../untils/validarAuto';
+import { Auto } from '../model/Auto';
+import { addAutoToPersona, updateAuto, deleteAuto } from '../repository/autoRepository';
+import { AutoDTO } from '../dto/autoDTO';
+import { findPersonaById, getAllPersonas } from '../repository/personaRespository';
 import { v4 as uuidv4 } from 'uuid';
-import type { Auto } from '../model/Auto';
+import { esAutoValido } from '../untils/validarAuto';
 
-export const AutoService = {
-    listarAutos: (id?: string) => {
-        if (id) {
-            return AutoRepository.getAutosByPersonaId(id);
-        }
-        return AutoRepository.getAllAutos();
-    },
+export const obtenerAutosDePersona = (idPersona: string) => {
+    const persona = findPersonaById(idPersona);
+    if (!persona) return null;
+    return persona.autos;
+  };
 
-    agregarAuto: (id: string, autoData: any): { success: boolean, auto?: Auto, error?: string } => {
-        if (!esAutoValido(autoData)) {
-            return { success: false, error: 'Datos del auto no válidos' };
-        }
+  export const obtenerTodosLosAutos = () => {
+    const personas = getAllPersonas();
+    const autosDePersona = personas.flatMap(p => p.autos);
+    return autosDePersona;
+  };
 
-        const auto: Auto = { ...autoData, id: uuidv4() };
+  export const crearAuto = (idPersona: string, autoDTO: AutoDTO): Auto | null => {
+    if (!esAutoValido(autoDTO)) return null;
 
-        const added = AutoRepository.addAutoToPersona(id, auto);
-        if (!added) {
-            return { success: false, error: 'Persona no encontrada' };
-        }
+    const persona = findPersonaById(idPersona);
+    if (!persona) return null;
+    const autoConId: Auto = {
+        ...autoDTO,
+        id: uuidv4(),
+        duenio: persona,
+    };
 
-        return { success: true, auto };
-    }
+    return addAutoToPersona(idPersona, autoConId);
+};
+export const editarAuto = (idPersona: string, idAuto: string, nuevosDatos: Partial<Auto>) => {
+    return updateAuto(idPersona, idAuto, nuevosDatos);
+};
+
+export const eliminarAuto = (idPersona: string, idAuto: string) => {
+    return deleteAuto(idPersona, idAuto);
 };

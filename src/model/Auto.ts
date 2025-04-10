@@ -9,6 +9,7 @@ export type Auto = {
     color: string;
     numeroChasis: string;
     numeroMotor: string;
+    duenio : Persona
 };
 
 export default Auto;
