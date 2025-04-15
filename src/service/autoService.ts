@@ -25,7 +25,7 @@ export const obtenerAutosDePersona = (idPersona: string) => {
     const autoConId: Auto = {
         ...autoDTO,
         id: uuidv4(),
-        duenio: persona,
+        duenioid: persona.id,
     };
 
     return addAutoToPersona(idPersona, autoConId);

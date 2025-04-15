@@ -1,4 +1,5 @@
 export type PersonaResumenDTO = {
+    id: string;
     dni: string;
     nombre: string;
     apellido: string;

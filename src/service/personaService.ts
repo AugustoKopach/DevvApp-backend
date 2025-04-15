@@ -17,6 +17,7 @@ type ResultadoOperacion =
 
 export const obtenerPersonasResumen = (): PersonaResumenDTO[] => {
   return getAllPersonas().map((p) => ({
+    id : p.id,
     dni: p.dni,
     nombre: p.nombre,
     apellido: p.apellido,
