@@ -23,7 +23,9 @@ export const obtenerPersonasResumen = (): PersonaResumenDTO[] => {
     apellido: p.apellido,
   }));
 };
-
+export const obtenerPersonaPorId = (id: string): Persona | undefined => {
+  return findPersonaById(id);
+};
 export const crearPersona = (persona: Persona): ResultadoOperacion => {
   if (!sonDatosValidos(persona)) return { error: 400, message: 'Datos inválidos' };
   if (findPersonaByDni(persona.dni)) return { error: 409, message: 'DNI en uso' };

@@ -6,4 +6,5 @@
     color: string;
     numeroChasis: string;
     numeroMotor: string;
+    duenio: string;
 };

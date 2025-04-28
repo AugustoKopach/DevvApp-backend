@@ -27,7 +27,7 @@ export const obtenerAutosDePersona = (idPersona: string) => {
         id: uuidv4(),
         duenioid: persona.id,
     };
-
+    console.log("Creando auto:", autoConId);
     return addAutoToPersona(idPersona, autoConId);
 };
 export const editarAuto = (idPersona: string, idAuto: string, nuevosDatos: Partial<Auto>) => {

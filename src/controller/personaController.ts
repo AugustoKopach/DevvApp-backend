@@ -1,12 +1,22 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { crearPersona, editarPersona, eliminarPersona, obtenerPersonasResumen } from '../service/personaService';
+import { crearPersona, editarPersona, eliminarPersona, obtenerPersonaPorId, obtenerPersonasResumen } from '../service/personaService';
 import { Persona } from '../model/Persona';
 
 const router = express.Router();
 
-router.get('/personas', (req, res) => {
-  res.json(obtenerPersonasResumen());
+router.get('/persona/:id?', (req, res) => {
+  const { id } = req.params;
+
+  if (id) {
+    const persona = obtenerPersonaPorId(id);
+    if (!persona) {
+       res.send(404).json({ message: 'Persona no encontrada' });
+    }
+    res.json(persona);
+  } else {
+    res.json(obtenerPersonasResumen());
+  }
 });
 
 router.post('/persona', (req, res) => {
@@ -21,6 +31,7 @@ router.post('/persona', (req, res) => {
 });
 
 router.put('/persona/:id', (req, res) => {
+  console.log("se entro a editar");
   const resultado = editarPersona(req.params.id, req.body);
 
   if ('error' in resultado) {
