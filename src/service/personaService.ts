@@ -7,7 +7,7 @@ import {
   addPersona,
   updatePersona,
   deletePersona
-} from '../repository/personaRespository';
+} from '../repository/personaRepository';
 import { sonDatosValidos } from '../untils/validarPersona';
 
 

@@ -2,7 +2,7 @@ import { Persona, Genero } from '../model/Persona';
 
 export const personas: Persona[] = [
     {
-        id : '12',
+        id: '12',
         dni: '12345678',
         nombre: 'pedro',
         apellido: 'picapiedras',
@@ -11,19 +11,20 @@ export const personas: Persona[] = [
         donanteOrganos: true,
         autos: [
             {
-                id   : "21",
+                id: "21",
                 marca: 'Toyota',
-                modelo: 'hilux',
+                modelo: 'Hilux',
                 año: 2020,
                 patente: 'ABC123',
                 color: 'Rojo',
                 numeroChasis: 'CHASIS123',
-                numeroMotor: 'MOTOR123'
+                numeroMotor: 'MOTOR123',
+                duenioid: '12'
             }
         ]
     },
     {
-        id : '1',
+        id: '1',
         dni: '214514241',
         nombre: 'pichichi',
         apellido: 'sarasi',
