@@ -1,7 +1,7 @@
 import { Auto } from '../model/Auto';
-import { addAutoToPersona, updateAuto, deleteAuto } from '../repository/autoRepository';
+import { addAutoToPersona, updateAuto, deleteAuto } from '../repository/autorepository';
 import { AutoDTO } from '../dto/autoDTO';
-import { findPersonaById, getAllPersonas } from '../repository/personaRepository';
+import { findPersonaById, getAllPersonas } from '../repository/personarepository';
 import { v4 as uuidv4 } from 'uuid';
 import { esAutoValido } from '../untils/validarAuto';
 
