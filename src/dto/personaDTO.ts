@@ -1,3 +1,5 @@
+import { Auto } from "../model/Auto";
+import { Genero } from "../model/Persona";
 export type PersonaResumenDTO = {
     id: string;
     dni: string;
@@ -11,7 +13,8 @@ export type PersonaResumenDTO = {
     apellido: string;
     dni: string;
     fechaNacimiento: string;
-    genero: string;
+    genero: Genero;
     donanteOrganos: boolean;
+    autos: Auto[];
   };
 

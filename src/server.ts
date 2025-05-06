@@ -1,4 +1,6 @@
 // Importamos nuestras dependencias
+import dotenv from 'dotenv';
+dotenv.config();
 import express, { Request, response, Response } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';

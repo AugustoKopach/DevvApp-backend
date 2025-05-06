@@ -40,6 +40,7 @@ export const crearPersona = (persona: Persona): ResultadoOperacion => {
     fechaNacimiento: persona.fechaNacimiento,
     genero: persona.genero,
     donanteOrganos: persona.donanteOrganos,
+    autos: persona.autos
   };
 
   return { success: true, persona: personaDto };
