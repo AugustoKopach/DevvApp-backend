@@ -9,6 +9,7 @@ import process from 'process';
 import Persona from './model/Persona';
 import autorouter from './controller/autoController';
 import personarouter from './controller/personaController';
+import {connectToMongo} from './db/mongoClient';
 
 
 const personas: Persona[] = [];
@@ -23,8 +24,10 @@ const port = process.env.PORT || 9000;
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
+(connectToMongo());
 app.use('/api', personarouter);
 app.use('/api', autorouter);
+
 
 // Mis endpoints van acá
 

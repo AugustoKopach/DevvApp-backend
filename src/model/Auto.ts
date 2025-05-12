@@ -4,12 +4,12 @@ export type Auto = {
     id   : string;
     marca: string;
     modelo: string;
-    año: number;
+    anio: number;
     patente: string;
     color: string;
     numeroChasis: string;
     numeroMotor: string;
-    duenioid : String;
+    duenioId : string;
 };
 
 export default Auto;

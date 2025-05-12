@@ -1,10 +1,10 @@
   export type AutoDTO = {
     marca: string;
     modelo: string;
-    año: number;
+    anio: number;
     patente: string;
     color: string;
     numeroChasis: string;
     numeroMotor: string;
-    duenio: string;
+    duenioId: string;
 };

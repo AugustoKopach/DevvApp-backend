@@ -4,7 +4,7 @@ export const personas: Persona[] = [
     {
         id: '12',
         dni: '12345678',
-        nombre: 'pedro',
+        nombre: 'pedro ',
         apellido: 'picapiedras',
         fechaNacimiento: '1990-05-15',
         genero: Genero.Masculino,
@@ -14,12 +14,12 @@ export const personas: Persona[] = [
                 id: "21",
                 marca: 'Toyota',
                 modelo: 'Hilux',
-                año: 2020,
+                anio: 2020,
                 patente: 'ABC123',
                 color: 'Rojo',
                 numeroChasis: 'CHASIS123',
                 numeroMotor: 'MOTOR123',
-                duenioid: '12'
+                duenioId: '12'
             }
         ]
     },

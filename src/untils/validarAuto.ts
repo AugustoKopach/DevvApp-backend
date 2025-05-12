@@ -7,7 +7,7 @@ export const esAutoValido = (auto: AutoDTO
     const {
         marca,
         modelo,
-        año,
+        anio,
         patente,
         color,
         numeroChasis,
@@ -26,7 +26,7 @@ export const esAutoValido = (auto: AutoDTO
     }
 
     const anioActual = new Date().getFullYear();
-    if (typeof año !== 'number' || año < 1800 || año > anioActual) {
+    if (typeof anio !== 'number' || anio < 1800 || anio > anioActual) {
         return false;
     }
 
